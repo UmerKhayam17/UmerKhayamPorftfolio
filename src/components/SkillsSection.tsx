@@ -1,63 +1,77 @@
 import { motion } from "framer-motion";
+import SectionHeading from "./SectionHeading";
 
 const skillCategories = [
   {
     title: "Frontend",
-    skills: ["React.js", "Next.js", "JavaScript", "Tailwind CSS", "Bootstrap", "HTML/CSS"],
+    color: "from-primary/20 to-primary/5",
+    borderColor: "border-primary/20",
+    skills: ["React.js", "Next.js", "JavaScript", "TypeScript", "Tailwind CSS", "Bootstrap", "HTML5/CSS3"],
   },
   {
     title: "Backend",
-    skills: ["Node.js", "Express.js", "REST APIs", "Django", "Python"],
+    color: "from-accent/20 to-accent/5",
+    borderColor: "border-accent/20",
+    skills: ["Node.js", "Express.js", "REST APIs", "Django", "Python", "Microservices"],
   },
   {
     title: "AI / ML",
-    skills: ["Python", "OpenCV", "TensorFlow", "PyTorch"],
+    color: "from-primary/20 to-primary/5",
+    borderColor: "border-primary/20",
+    skills: ["Python", "OpenCV", "TensorFlow", "PyTorch", "NLP", "Computer Vision"],
   },
   {
     title: "Databases",
-    skills: ["MongoDB", "PostgreSQL", "MySQL", "Redis"],
+    color: "from-accent/20 to-accent/5",
+    borderColor: "border-accent/20",
+    skills: ["MongoDB", "PostgreSQL", "MySQL", "Redis", "Prisma"],
   },
   {
     title: "DevOps & Tools",
-    skills: ["Docker", "CI/CD", "Nginx", "Git", "GitHub", "Linux", "Vercel", "Render"],
+    color: "from-primary/20 to-primary/5",
+    borderColor: "border-primary/20",
+    skills: ["Docker", "CI/CD", "Nginx", "Git", "GitHub", "Linux", "Vercel", "Render", "Postman"],
   },
 ];
 
 const SkillsSection = () => {
   return (
-    <section id="skills" className="py-24 px-6 bg-card/30">
-      <div className="container mx-auto max-w-5xl">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <h2 className="text-3xl md:text-4xl font-bold mb-2">
-            Tech <span className="text-gradient-primary">Stack</span>
-          </h2>
-          <div className="w-16 h-1 bg-gradient-primary rounded-full mb-12" />
-        </motion.div>
+    <section id="skills" className="section-padding relative bg-card/20">
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
 
-        <div className="grid gap-8">
+      <div className="container mx-auto max-w-6xl">
+        <SectionHeading
+          badge="Skills"
+          title={<>My Tech <span className="text-gradient-primary">Arsenal</span></>}
+          subtitle="Technologies and tools I use to bring ideas to production."
+        />
+
+        <div className="space-y-6">
           {skillCategories.map((cat, i) => (
             <motion.div
               key={cat.title}
-              initial={{ opacity: 0, x: -20 }}
+              initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="flex flex-col sm:flex-row sm:items-center gap-4"
+              className="flex flex-col sm:flex-row sm:items-start gap-5 p-5 rounded-2xl bg-card/50 border border-border"
             >
-              <span className="text-sm font-mono text-primary w-32 shrink-0">{cat.title}</span>
-              <div className="flex flex-wrap gap-2">
-                {cat.skills.map((skill) => (
-                  <span
+              <div className={`shrink-0 px-4 py-2 rounded-xl bg-gradient-to-r ${cat.color} border ${cat.borderColor}`}>
+                <span className="text-sm font-mono font-semibold text-foreground whitespace-nowrap">{cat.title}</span>
+              </div>
+              <div className="flex flex-wrap gap-2.5">
+                {cat.skills.map((skill, j) => (
+                  <motion.span
                     key={skill}
-                    className="px-3 py-1.5 text-sm rounded-lg border border-border bg-card text-foreground hover:border-primary/40 hover:text-primary transition-colors cursor-default"
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.3, delay: i * 0.1 + j * 0.03 }}
+                    whileHover={{ scale: 1.05, y: -2 }}
+                    className="px-4 py-2 text-sm rounded-xl border border-border bg-secondary/50 text-secondary-foreground hover:border-primary/30 hover:text-primary hover:bg-primary/5 transition-all duration-300 cursor-default font-medium"
                   >
                     {skill}
-                  </span>
+                  </motion.span>
                 ))}
               </div>
             </motion.div>
