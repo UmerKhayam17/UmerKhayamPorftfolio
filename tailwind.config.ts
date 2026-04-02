@@ -13,8 +13,8 @@ export default {
       },
     },
     fontFamily: {
-      display: ['Space Grotesk', 'sans-serif'],
-      body: ['Inter', 'sans-serif'],
+      display: ["Aptos", "Segoe UI", "sans-serif"],
+      body: ["Aptos", "Segoe UI", "sans-serif"],
       mono: ['JetBrains Mono', 'monospace'],
     },
     extend: {
@@ -43,6 +43,10 @@ export default {
         accent: {
           DEFAULT: "hsl(var(--accent))",
           foreground: "hsl(var(--accent-foreground))",
+        },
+        tertiary: {
+          DEFAULT: "hsl(var(--tertiary))",
+          foreground: "hsl(var(--tertiary-foreground))",
         },
         popover: {
           DEFAULT: "hsl(var(--popover))",

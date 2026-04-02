@@ -17,19 +17,31 @@ const SectionHeading = ({ badge, title, subtitle, center }: SectionHeadingProps)
     className={center ? "text-center" : ""}
   >
     {badge && (
-      <span className="inline-block px-3 py-1 text-xs font-mono rounded-full border border-primary/20 text-primary bg-primary/5 mb-4 uppercase tracking-widest">
+      <motion.span
+        initial={{ opacity: 0, scale: 0.92 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.35, delay: 0.05 }}
+        className="inline-block px-3 py-1 text-xs font-mono rounded-full border border-primary/20 text-primary bg-primary/5 mb-4 uppercase tracking-widest"
+      >
         {badge}
-      </span>
+      </motion.span>
     )}
-    <h2 className="text-3xl md:text-5xl font-bold font-display tracking-tight mb-3">
+    <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold font-display tracking-tight mb-3">
       {title}
     </h2>
     {subtitle && (
-      <p className={`text-muted-foreground text-lg leading-relaxed ${center ? "max-w-2xl mx-auto" : "max-w-3xl"}`}>
+      <p className={`text-muted-foreground text-base sm:text-lg leading-relaxed ${center ? "max-w-2xl mx-auto" : "max-w-3xl"}`}>
         {subtitle}
       </p>
     )}
-    <div className={`w-20 h-1 bg-gradient-primary rounded-full mt-6 mb-12 ${center ? "mx-auto" : ""}`} />
+    <motion.div
+      initial={{ scaleX: 0, opacity: 0.5 }}
+      whileInView={{ scaleX: 1, opacity: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6, delay: 0.15 }}
+      className={`w-20 h-1 origin-left bg-gradient-primary rounded-full mt-6 mb-12 ${center ? "mx-auto origin-center" : ""}`}
+    />
   </motion.div>
 );
 

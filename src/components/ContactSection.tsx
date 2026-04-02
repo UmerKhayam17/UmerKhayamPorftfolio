@@ -8,7 +8,7 @@ const ContactSection = () => {
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
       
       {/* Decorative glow */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-primary/3 rounded-full blur-[120px]" />
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[320px] sm:w-[500px] md:w-[600px] h-[260px] sm:h-[340px] md:h-[400px] bg-primary/3 rounded-full blur-[120px]" />
 
       <div className="container mx-auto max-w-5xl relative z-10">
         <SectionHeading
@@ -18,7 +18,7 @@ const ContactSection = () => {
           center
         />
 
-        <div className="grid md:grid-cols-3 gap-5 max-w-3xl mx-auto mb-16">
+        <div className="grid md:grid-cols-3 gap-4 sm:gap-5 max-w-3xl mx-auto mb-12 sm:mb-16">
           {[
             { icon: Mail, label: "Email", value: "umerkhayam1717@gmail.com", href: "mailto:umerkhayam1717@gmail.com" },
             { icon: Phone, label: "Phone", value: "+92 316 5511251", href: "tel:03165511251" },
@@ -31,7 +31,7 @@ const ContactSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="group p-7 rounded-2xl bg-card border border-border hover:border-primary/20 hover:shadow-glow transition-all duration-500 text-center hover:-translate-y-1"
+              className="group p-5 sm:p-7 rounded-2xl bg-card border border-border hover:border-primary/20 hover:shadow-glow transition-all duration-500 text-center hover:-translate-y-1"
             >
               <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-4 group-hover:bg-primary/15 transition-colors">
                 <item.icon className="w-5 h-5 text-primary group-hover:scale-110 transition-transform duration-300" />
@@ -50,10 +50,10 @@ const ContactSection = () => {
           transition={{ duration: 0.6 }}
           className="text-center"
         >
-          <div className="inline-flex flex-wrap items-center gap-4 justify-center">
+          <div className="inline-flex w-full sm:w-auto flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3 sm:gap-4 justify-center">
             <a
               href="mailto:umerkhayam1717@gmail.com"
-              className="group inline-flex items-center gap-2.5 px-8 py-4 rounded-xl bg-gradient-primary text-primary-foreground font-semibold hover:shadow-glow transition-all duration-300 hover:-translate-y-0.5"
+              className="group inline-flex w-full sm:w-auto justify-center items-center gap-2.5 px-8 py-4 rounded-xl bg-gradient-primary text-primary-foreground font-semibold hover:shadow-glow transition-all duration-300 hover:-translate-y-0.5"
             >
               <Send className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
               Send a Message
@@ -62,7 +62,7 @@ const ContactSection = () => {
               href="https://www.linkedin.com/in/umerkhayamsatti/"
               target="_blank"
               rel="noopener"
-              className="inline-flex items-center gap-2.5 px-8 py-4 rounded-xl border border-border text-foreground font-semibold hover:border-primary/30 hover:bg-primary/5 transition-all duration-300"
+              className="inline-flex w-full sm:w-auto justify-center items-center gap-2.5 px-8 py-4 rounded-xl border border-border text-foreground font-semibold hover:border-primary/30 hover:bg-primary/5 transition-all duration-300"
             >
               <Linkedin className="w-4 h-4" />
               Connect on LinkedIn

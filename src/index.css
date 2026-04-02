@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,60 +6,63 @@
 
 @layer base {
   :root {
-    --background: 225 25% 3%;
-    --foreground: 210 20% 95%;
+    --background: 210 40% 98%;
+    --foreground: 222 47% 14%;
 
-    --card: 225 20% 6%;
-    --card-foreground: 210 20% 95%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 14%;
 
-    --popover: 225 20% 6%;
-    --popover-foreground: 210 20% 95%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 14%;
 
-    --primary: 170 80% 50%;
-    --primary-foreground: 225 25% 3%;
+    --primary: 217 91% 60%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 225 16% 11%;
-    --secondary-foreground: 210 20% 85%;
+    --secondary: 214 35% 94%;
+    --secondary-foreground: 222 25% 22%;
 
-    --muted: 225 14% 10%;
-    --muted-foreground: 215 12% 45%;
+    --tertiary: 199 89% 48%;
+    --tertiary-foreground: 0 0% 100%;
 
-    --accent: 260 75% 60%;
-    --accent-foreground: 210 20% 98%;
+    --muted: 214 24% 95%;
+    --muted-foreground: 215 16% 40%;
+
+    --accent: var(--tertiary);
+    --accent-foreground: var(--tertiary-foreground);
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 225 14% 12%;
-    --input: 225 14% 12%;
-    --ring: 170 80% 50%;
+    --border: 214 24% 86%;
+    --input: 214 24% 86%;
+    --ring: 217 91% 60%;
 
     --radius: 0.75rem;
 
-    --gradient-primary: linear-gradient(135deg, hsl(170, 80%, 50%), hsl(195, 90%, 45%));
-    --gradient-accent: linear-gradient(135deg, hsl(260, 75%, 60%), hsl(290, 70%, 50%));
+    --gradient-primary: linear-gradient(135deg, hsl(217, 90%, 28%), hsl(199 89% 48%));
+    --gradient-accent: linear-gradient(135deg, hsl(217, 54%, 54%), hsl(189 94% 43%));
     --gradient-warm: linear-gradient(135deg, hsl(30, 90%, 55%), hsl(350, 80%, 55%));
-    --gradient-hero: radial-gradient(ellipse at 20% 50%, hsl(170 80% 50% / 0.06) 0%, transparent 50%),
-                     radial-gradient(ellipse at 80% 20%, hsl(260 75% 60% / 0.04) 0%, transparent 50%),
-                     radial-gradient(ellipse at 50% 100%, hsl(195 90% 45% / 0.03) 0%, transparent 50%),
-                     hsl(225, 25%, 3%);
-    --shadow-glow: 0 0 40px -8px hsl(170 80% 50% / 0.35);
-    --shadow-glow-lg: 0 0 80px -12px hsl(170 80% 50% / 0.2);
-    --shadow-card: 0 8px 32px -8px hsl(0 0% 0% / 0.5);
-    --shadow-card-hover: 0 16px 48px -12px hsl(0 0% 0% / 0.6);
+    --gradient-hero: radial-gradient(ellipse at 20% 45%, hsl(217 91% 60% / 0.12) 0%, transparent 52%),
+                     radial-gradient(ellipse at 80% 20%, hsl(199 89% 48% / 0.10) 0%, transparent 50%),
+                     radial-gradient(ellipse at 55% 100%, hsl(189 94% 43% / 0.08) 0%, transparent 50%),
+                     hsl(210, 70%, 96%);
+    --shadow-glow: 0 0 42px -10px hsl(217 91% 60% / 0.3);
+    --shadow-glow-lg: 0 0 84px -14px hsl(217 91% 60% / 0.2);
+    --shadow-card: 0 10px 30px -10px hsl(222 35% 20% / 0.14);
+    --shadow-card-hover: 0 18px 52px -16px hsl(222 35% 20% / 0.2);
 
-    --font-display: 'Space Grotesk', sans-serif;
-    --font-body: 'Inter', sans-serif;
+    --font-display: 'Aptos', 'Segoe UI', sans-serif;
+    --font-body: 'Aptos', 'Segoe UI', sans-serif;
     --font-mono: 'JetBrains Mono', monospace;
 
-    --sidebar-background: 225 20% 5%;
-    --sidebar-foreground: 210 20% 92%;
-    --sidebar-primary: 170 80% 50%;
-    --sidebar-primary-foreground: 225 25% 3%;
-    --sidebar-accent: 225 14% 10%;
-    --sidebar-accent-foreground: 210 20% 92%;
-    --sidebar-border: 225 14% 12%;
-    --sidebar-ring: 170 80% 50%;
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 222 47% 14%;
+    --sidebar-primary: 217 91% 60%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 214 24% 95%;
+    --sidebar-accent-foreground: 222 47% 14%;
+    --sidebar-border: 214 24% 86%;
+    --sidebar-ring: 217 91% 60%;
   }
 }
 
@@ -82,8 +85,8 @@
   }
 
   ::selection {
-    background: hsl(170 80% 50% / 0.25);
-    color: hsl(210 20% 98%);
+    background: hsl(217 91% 60% / 0.22);
+    color: hsl(0 0% 100%);
   }
 }
 
@@ -131,15 +134,15 @@
   }
 
   .glass {
-    background: hsl(225 20% 6% / 0.7);
+    background: hsla(0, 0%, 100%, 0.72);
     backdrop-filter: blur(20px) saturate(1.2);
-    border-bottom: 1px solid hsl(225 14% 14% / 0.6);
+    border-bottom: 1px solid hsl(214 24% 88% / 0.9);
   }
 
   .glass-card {
-    background: hsl(225 20% 6% / 0.5);
+    background: hsl(0 0% 100% / 0.65);
     backdrop-filter: blur(12px);
-    border: 1px solid hsl(225 14% 14% / 0.4);
+    border: 1px solid hsl(214 24% 88% / 0.9);
   }
 
   .border-gradient {
@@ -147,7 +150,7 @@
   }
 
   .section-padding {
-    @apply py-28 md:py-36 px-6;
+    @apply py-20 sm:py-24 md:py-32 lg:py-36 px-4 sm:px-6;
   }
 
   .animate-float {
@@ -160,6 +163,32 @@
 
   .animate-pulse-slow {
     animation: pulse 4s ease-in-out infinite;
+  }
+
+  .card-spline {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+  }
+
+  .card-spline::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    background: linear-gradient(120deg, transparent 20%, hsl(var(--primary) / 0.12) 45%, hsl(var(--tertiary) / 0.1) 55%, transparent 80%);
+    transform: translateX(-120%);
+    transition: transform 0.8s ease;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .card-spline:hover::before {
+    transform: translateX(120%);
+  }
+
+  .card-spline > * {
+    position: relative;
+    z-index: 1;
   }
 }
 
@@ -176,6 +205,12 @@
 /* Smooth scrolling */
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body,
+#root {
+  overflow-x: hidden;
 }
 
 /* Custom scrollbar */
@@ -184,14 +219,14 @@ html {
 }
 
 ::-webkit-scrollbar-track {
-  background: hsl(225, 25%, 3%);
+  background: hsl(210 33% 95%);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: hsl(225, 14%, 16%);
+  background: hsl(214 24% 78%);
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: hsl(170, 80%, 50%);
+  background: hsl(217 91% 60%);
 }

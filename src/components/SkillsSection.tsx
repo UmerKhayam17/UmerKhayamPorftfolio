@@ -1,38 +1,7 @@
 import { motion } from "framer-motion";
 import SectionHeading from "./SectionHeading";
-
-const skillCategories = [
-  {
-    title: "Frontend",
-    color: "from-primary/20 to-primary/5",
-    borderColor: "border-primary/20",
-    skills: ["React.js", "Next.js", "JavaScript", "TypeScript", "Tailwind CSS", "Bootstrap", "HTML5/CSS3"],
-  },
-  {
-    title: "Backend",
-    color: "from-accent/20 to-accent/5",
-    borderColor: "border-accent/20",
-    skills: ["Node.js", "Express.js", "REST APIs", "Django", "Python", "Microservices"],
-  },
-  {
-    title: "AI / ML",
-    color: "from-primary/20 to-primary/5",
-    borderColor: "border-primary/20",
-    skills: ["Python", "OpenCV", "TensorFlow", "PyTorch", "NLP", "Computer Vision"],
-  },
-  {
-    title: "Databases",
-    color: "from-accent/20 to-accent/5",
-    borderColor: "border-accent/20",
-    skills: ["MongoDB", "PostgreSQL", "MySQL", "Redis", "Prisma"],
-  },
-  {
-    title: "DevOps & Tools",
-    color: "from-primary/20 to-primary/5",
-    borderColor: "border-primary/20",
-    skills: ["Docker", "CI/CD", "Nginx", "Git", "GitHub", "Linux", "Vercel", "Render", "Postman"],
-  },
-];
+import { skillCategories } from "@/data/portfolioData";
+import { getTechIcon } from "@/lib/techIcons";
 
 const SkillsSection = () => {
   return (
@@ -54,7 +23,7 @@ const SkillsSection = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="flex flex-col sm:flex-row sm:items-start gap-5 p-5 rounded-2xl bg-card/50 border border-border"
+              className="card-spline flex flex-col sm:flex-row sm:items-start gap-5 p-5 rounded-2xl bg-card/50 border border-border"
             >
               <div className={`shrink-0 px-4 py-2 rounded-xl bg-gradient-to-r ${cat.color} border ${cat.borderColor}`}>
                 <span className="text-sm font-mono font-semibold text-foreground whitespace-nowrap">{cat.title}</span>
@@ -68,8 +37,14 @@ const SkillsSection = () => {
                     viewport={{ once: true }}
                     transition={{ duration: 0.3, delay: i * 0.1 + j * 0.03 }}
                     whileHover={{ scale: 1.05, y: -2 }}
-                    className="px-4 py-2 text-sm rounded-xl border border-border bg-secondary/50 text-secondary-foreground hover:border-primary/30 hover:text-primary hover:bg-primary/5 transition-all duration-300 cursor-default font-medium"
+                    className="px-4 py-2 text-sm rounded-xl border border-border bg-secondary/50 text-secondary-foreground hover:border-primary/30 hover:text-primary hover:bg-primary/5 transition-all duration-300 cursor-default font-medium inline-flex items-center gap-2"
                   >
+                    {(() => {
+                      const iconMeta = getTechIcon(skill);
+                      if (!iconMeta) return null;
+                      const Icon = iconMeta.icon;
+                      return <Icon className="w-4 h-4 shrink-0" style={{ color: iconMeta.color }} />;
+                    })()}
                     {skill}
                   </motion.span>
                 ))}

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
 const links = [
@@ -7,12 +7,15 @@ const links = [
   { label: "Skills", href: "#skills" },
   { label: "Experience", href: "#experience" },
   { label: "Projects", href: "#projects" },
+  { label: "Resume", href: "#resume" },
   { label: "Contact", href: "#contact" },
 ];
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const { scrollYProgress } = useScroll();
+  const smoothProgress = useSpring(scrollYProgress, { stiffness: 120, damping: 24, mass: 0.2 });
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
@@ -29,22 +32,30 @@ const Navbar = () => {
         scrolled ? "glass shadow-card" : "bg-transparent"
       }`}
     >
-      <div className="container mx-auto px-6 py-4 flex items-center justify-between">
-        <a href="#" className="text-2xl font-bold font-display group">
+      <motion.div
+        className="absolute top-0 left-0 right-0 h-[2px] origin-left bg-gradient-primary"
+        style={{ scaleX: smoothProgress }}
+      />
+
+      <div className="container mx-auto px-4 sm:px-6 py-3.5 sm:py-4 flex items-center justify-between">
+        <a href="#" className="text-xl sm:text-2xl font-bold font-display group">
           <span className="text-gradient-primary">UK</span>
           <span className="text-primary group-hover:opacity-0 transition-opacity">.</span>
         </a>
 
         {/* Desktop */}
         <div className="hidden md:flex items-center gap-1">
-          {links.map((l) => (
-            <a
+          {links.map((l, i) => (
+            <motion.a
               key={l.label}
               href={l.href}
+              initial={{ opacity: 0, y: -8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.35, delay: 0.1 + i * 0.04 }}
               className="px-4 py-2 text-sm text-muted-foreground hover:text-primary rounded-lg hover:bg-primary/5 transition-all duration-300 font-medium"
             >
               {l.label}
-            </a>
+            </motion.a>
           ))}
           <a
             href="#contact"

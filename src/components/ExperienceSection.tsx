@@ -1,46 +1,31 @@
-import { motion } from "framer-motion";
 import { Briefcase, GraduationCap, Calendar } from "lucide-react";
+import { useRef } from "react";
 import SectionHeading from "./SectionHeading";
-
-const experiences = [
-  {
-    type: "work" as const,
-    title: "MERN Stack Developer",
-    org: "ClickMasters",
-    period: "Oct 2024 – Present",
-    current: true,
-    points: [
-      "Developing scalable SaaS-based CRM and ERP platforms using MERN stack",
-      "Designing modular backend services and multi-tenant architecture",
-      "Building dashboards, automation workflows, and secure authentication systems",
-      "Handling deployments and optimizing databases for production systems",
-    ],
-  },
-  {
-    type: "work" as const,
-    title: "Full Stack Developer",
-    org: "Smart Solutions",
-    period: "Jan 2024 – Sep 2024",
-    current: false,
-    points: [
-      "Built full-stack applications with real-time dashboards and analytics",
-      "Integrated third-party APIs such as payment gateways and Google Maps",
-      "Improved system performance through optimized MongoDB queries",
-    ],
-  },
-  {
-    type: "edu" as const,
-    title: "Bachelor of Computer Science",
-    org: "PMAS Arid Agriculture University",
-    period: "2020 – 2024",
-    current: false,
-    points: [],
-  },
-];
+import { experiences } from "@/data/portfolioData";
+import { TimelineContent } from "@/components/ui/timeline-animation";
 
 const ExperienceSection = () => {
+  const timelineRef = useRef<HTMLElement>(null);
+
+  const revealVariants = {
+    visible: (i: number) => ({
+      y: 0,
+      opacity: 1,
+      filter: "blur(0px)",
+      transition: {
+        delay: i * 0.14,
+        duration: 0.55,
+      },
+    }),
+    hidden: {
+      filter: "blur(10px)",
+      y: -16,
+      opacity: 0,
+    },
+  };
+
   return (
-    <section id="experience" className="section-padding relative">
+    <section id="experience" className="section-padding relative" ref={timelineRef}>
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
       
       <div className="container mx-auto max-w-5xl">
@@ -56,16 +41,15 @@ const ExperienceSection = () => {
 
           <div className="space-y-8">
             {experiences.map((exp, i) => (
-              <motion.div
+              <TimelineContent
                 key={i}
-                initial={{ opacity: 0, x: -30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: i * 0.15, ease: [0.22, 1, 0.36, 1] }}
-                className="relative pl-14"
+                animationNum={i}
+                customVariants={revealVariants}
+                timelineRef={timelineRef}
+                className="relative pl-12 sm:pl-14"
               >
                 {/* Timeline dot */}
-                <div className={`absolute left-0 top-6 w-[38px] h-[38px] rounded-full flex items-center justify-center ${
+                <div className={`absolute left-0 top-5 sm:top-6 w-8 h-8 sm:w-[38px] sm:h-[38px] rounded-full flex items-center justify-center ${
                   exp.current 
                     ? "bg-primary/10 border-2 border-primary shadow-glow" 
                     : "bg-card border-2 border-border"
@@ -77,7 +61,7 @@ const ExperienceSection = () => {
                   )}
                 </div>
 
-                <div className={`p-6 md:p-8 rounded-2xl border transition-all duration-300 hover:-translate-y-1 ${
+                <div className={`card-spline p-5 sm:p-6 md:p-8 rounded-2xl border transition-all duration-300 hover:-translate-y-1 ${
                   exp.current 
                     ? "bg-card border-primary/15 shadow-card hover:shadow-glow" 
                     : "bg-card/50 border-border hover:border-border"
@@ -106,7 +90,7 @@ const ExperienceSection = () => {
                     </ul>
                   )}
                 </div>
-              </motion.div>
+              </TimelineContent>
             ))}
           </div>
         </div>
