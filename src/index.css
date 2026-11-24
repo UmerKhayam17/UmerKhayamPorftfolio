@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -51,8 +51,8 @@
     --shadow-card: 0 10px 30px -10px hsl(222 35% 20% / 0.14);
     --shadow-card-hover: 0 18px 52px -16px hsl(222 35% 20% / 0.2);
 
-    --font-display: 'Aptos', 'Segoe UI', sans-serif;
-    --font-body: 'Aptos', 'Segoe UI', sans-serif;
+    --font-display: 'Plus Jakarta Sans', 'Segoe UI', system-ui, sans-serif;
+    --font-body: 'Plus Jakarta Sans', 'Segoe UI', system-ui, sans-serif;
     --font-mono: 'JetBrains Mono', monospace;
 
     --sidebar-background: 0 0% 100%;
@@ -63,7 +63,11 @@
     --sidebar-accent-foreground: 222 47% 14%;
     --sidebar-border: 214 24% 86%;
     --sidebar-ring: 217 91% 60%;
+
+    --glass-bg: 0 0% 100%;
+    --glass-border: 214 24% 88%;
   }
+
 }
 
 @layer base {
@@ -85,8 +89,21 @@
   }
 
   ::selection {
-    background: hsl(217 91% 60% / 0.22);
-    color: hsl(0 0% 100%);
+    background: hsl(var(--primary) / 0.25);
+    color: hsl(var(--foreground));
+  }
+
+  section[id] {
+    scroll-margin-top: 4.5rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 }
 
@@ -134,15 +151,56 @@
   }
 
   .glass {
-    background: hsla(0, 0%, 100%, 0.72);
+    background: hsl(var(--glass-bg) / 0.72);
     backdrop-filter: blur(20px) saturate(1.2);
-    border-bottom: 1px solid hsl(214 24% 88% / 0.9);
+    border-bottom: 1px solid hsl(var(--glass-border) / 0.9);
   }
 
   .glass-card {
-    background: hsl(0 0% 100% / 0.65);
+    background: hsl(var(--glass-bg) / 0.65);
     backdrop-filter: blur(12px);
-    border: 1px solid hsl(214 24% 88% / 0.9);
+    border: 1px solid hsl(var(--glass-border) / 0.9);
+  }
+
+  /* Cursor-following spotlight. --mx/--my are set by useSpotlight(). */
+  .spotlight {
+    position: relative;
+  }
+
+  .spotlight::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), hsl(var(--primary) / 0.12), transparent 45%);
+    z-index: 0;
+  }
+
+  .spotlight:hover::after {
+    opacity: 1;
+  }
+
+  .marquee {
+    mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+  }
+
+  .marquee-track {
+    animation: marquee 40s linear infinite;
+  }
+
+  .marquee:hover .marquee-track {
+    animation-play-state: paused;
+  }
+
+  .bg-grid {
+    background-image:
+      linear-gradient(hsl(var(--border) / 0.5) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--border) / 0.5) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: radial-gradient(ellipse at center, #000 30%, transparent 75%);
   }
 
   .border-gradient {
@@ -197,6 +255,11 @@
   50% { transform: translateY(-20px); }
 }
 
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
 @keyframes pulse {
   0%, 100% { opacity: 1; }
   50% { opacity: 0.5; }
@@ -219,11 +282,11 @@ body,
 }
 
 ::-webkit-scrollbar-track {
-  background: hsl(210 33% 95%);
+  background: hsl(var(--background));
 }
 
 ::-webkit-scrollbar-thumb {
-  background: hsl(214 24% 78%);
+  background: hsl(var(--border));
   border-radius: 3px;
 }
 

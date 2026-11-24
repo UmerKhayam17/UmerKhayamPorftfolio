@@ -13,8 +13,8 @@ export default {
       },
     },
     fontFamily: {
-      display: ["Aptos", "Segoe UI", "sans-serif"],
-      body: ["Aptos", "Segoe UI", "sans-serif"],
+      display: ["Plus Jakarta Sans", "Segoe UI", "system-ui", "sans-serif"],
+      body: ["Plus Jakarta Sans", "Segoe UI", "system-ui", "sans-serif"],
       mono: ['JetBrains Mono', 'monospace'],
     },
     extend: {

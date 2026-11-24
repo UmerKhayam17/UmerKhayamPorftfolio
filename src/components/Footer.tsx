@@ -14,20 +14,20 @@ const Footer = () => (
         </div>
 
         <div className="flex items-center justify-center gap-3">
-          <a href={profile.github} target="_blank" rel="noopener" className="p-2.5 rounded-xl text-muted-foreground hover:text-primary hover:bg-primary/5 transition-all duration-300">
+          <a href={profile.github} target="_blank" rel="noopener noreferrer" className="p-2.5 rounded-xl text-muted-foreground hover:text-primary hover:bg-primary/5 transition-all duration-300">
             <Github className="w-4 h-4" />
           </a>
-          <a href="https://www.linkedin.com/in/umerkhayamsatti/" target="_blank" rel="noopener" className="p-2.5 rounded-xl text-muted-foreground hover:text-primary hover:bg-primary/5 transition-all duration-300">
+          <a href={profile.linkedin} target="_blank" rel="noopener noreferrer" className="p-2.5 rounded-xl text-muted-foreground hover:text-primary hover:bg-primary/5 transition-all duration-300">
             <Linkedin className="w-4 h-4" />
           </a>
-          <a href="mailto:umerkhayam1717@gmail.com" className="p-2.5 rounded-xl text-muted-foreground hover:text-primary hover:bg-primary/5 transition-all duration-300">
+          <a href={`mailto:${profile.email}`} className="p-2.5 rounded-xl text-muted-foreground hover:text-primary hover:bg-primary/5 transition-all duration-300">
             <Mail className="w-4 h-4" />
           </a>
         </div>
 
         <div className="text-center md:text-right">
           <p className="text-xs text-muted-foreground flex items-center justify-center md:justify-end gap-1.5">
-            Built with <Heart className="w-3 h-3 text-primary fill-primary" /> by Umer Khayam
+            Built<p className="w-3 h-3 text-primary fill-primary" /> by {profile.name}
           </p>
           <p className="text-xs text-muted-foreground mt-1">© {new Date().getFullYear()} All rights reserved.</p>
         </div>

@@ -25,6 +25,14 @@ import {
   SiPostman,
   SiStripe,
   SiPaypal,
+  SiFastapi,
+  SiPrisma,
+  SiExpo,
+  SiOllama,
+  SiSocketdotio,
+  SiOnnx,
+  SiYolo,
+  SiPm2,
 } from "react-icons/si";
 import { FaServer } from "react-icons/fa6";
 
@@ -63,9 +71,37 @@ const iconMap: Record<string, TechIconMeta> = {
   Postman: { icon: SiPostman, color: "#FF6C37" },
   Stripe: { icon: SiStripe, color: "#635BFF" },
   PayPal: { icon: SiPaypal, color: "#00457C" },
+  FastAPI: { icon: SiFastapi, color: "#009688" },
+  Prisma: { icon: SiPrisma, color: "#2D3748" },
+  Expo: { icon: SiExpo, color: "#000020" },
+  "React Native": { icon: SiReact, color: "#61DAFB" },
+  Ollama: { icon: SiOllama, color: "#111111" },
+  "Socket.IO": { icon: SiSocketdotio, color: "#010101" },
+  ONNX: { icon: SiOnnx, color: "#005CED" },
+  YOLO: { icon: SiYolo, color: "#111F68" },
+  PM2: { icon: SiPm2, color: "#2B037A" },
   "REST API": { icon: FaServer, color: "#0EA5E9" },
   "REST APIs": { icon: FaServer, color: "#0EA5E9" },
   "Maps API": { icon: FaServer, color: "#0EA5E9" },
 };
 
-export const getTechIcon = (tech: string): TechIconMeta | null => iconMap[tech] ?? null;
+/** Near-black brand icons inherit the surrounding text color so they match the UI. */
+const isTooDark = (hex: string) => {
+  const n = parseInt(hex.slice(1), 16);
+  const r = (n >> 16) & 255, g = (n >> 8) & 255, b = n & 255;
+  return 0.2126 * r + 0.7152 * g + 0.0722 * b < 60;
+};
+
+export const getTechIcon = (tech: string): TechIconMeta | null => {
+  const meta = iconMap[tech];
+  if (!meta) return null;
+  return isTooDark(meta.color) ? { ...meta, color: "currentColor" } : meta;
+};
+
+/** All mapped techs, deduplicated by icon (e.g. "React" and "React.js" share one). */
+export const allTechIcons = () => {
+  const seen = new Set<IconType>();
+  return Object.entries(iconMap)
+    .filter(([, m]) => !seen.has(m.icon) && seen.add(m.icon) && m.icon !== FaServer)
+    .map(([name]) => ({ name, ...getTechIcon(name)! }));
+};

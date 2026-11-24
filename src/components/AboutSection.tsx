@@ -1,138 +1,120 @@
 import { motion } from "framer-motion";
-import { Code2, Database, Cloud, Brain, Layers, Terminal, type LucideIcon } from "lucide-react";
+import {
+  Brain,
+  Cloud,
+  Code2,
+  GraduationCap,
+  Layers,
+  MapPin,
+  ScanFace,
+  Sparkles,
+  Bot,
+  Briefcase,
+  type LucideIcon,
+} from "lucide-react";
 import SectionHeading from "./SectionHeading";
-import { CardStack, type CardStackItem } from "@/components/ui/card-stack";
+import { experiences, profile } from "@/data/portfolioData";
 
-type HighlightItem = CardStackItem & {
-  icon: LucideIcon;
-  color: string;
-};
+type Highlight = { icon: LucideIcon; title: string; description: string };
 
-const highlights: HighlightItem[] = [
+const highlights: Highlight[] = [
   {
-    id: "full-stack",
-    icon: Code2,
-    title: "Full-Stack Development",
-    description:
-      "End-to-end web applications built with React.js, Node.js, and modern JavaScript tooling - from pixel-perfect UIs to robust server-side logic.",
-    color: "text-primary",
-  },
-  {
-    id: "ai-ml",
-    icon: Brain,
-    title: "AI & Machine Learning",
-    description:
-      "Intelligent, data-driven solutions using Python, TensorFlow, PyTorch, and OpenCV - including computer vision and NLP integrations.",
-    color: "text-accent",
-  },
-  {
-    id: "saas-architecture",
     icon: Layers,
-    title: "SaaS Architecture",
-    description:
-      "Multi-tenant SaaS platforms engineered with modular, scalable architecture - built to handle real users, real data, and real growth.",
-    color: "text-primary",
+    title: "SaaS, ERP & CRM",
+    description: "Multi-tenant platforms with role-based access, dashboards, billing, and modular backends — built for real users and real data.",
   },
   {
-    id: "database-design",
-    icon: Database,
-    title: "Database Design",
-    description:
-      "Optimized database schemas and query performance across MongoDB, PostgreSQL, MySQL, and Redis for high-load production systems.",
-    color: "text-accent",
+    icon: ScanFace,
+    title: "Computer Vision",
+    description: "Face recognition, person re-ID, ANPR, pose and object tracking on live CCTV with YOLO, PyTorch, and ONNX on GPU.",
   },
   {
-    id: "cloud-devops",
+    icon: Bot,
+    title: "LLM & Voice Agents",
+    description: "AI voice agents for call centers and local-LLM automation (Ollama) — no data leaves the client's servers.",
+  },
+  {
+    icon: Code2,
+    title: "Full-Stack Web & Mobile",
+    description: "React, Next.js, and React Native front ends on Node.js, Django, or FastAPI APIs with MongoDB or PostgreSQL.",
+  },
+  {
+    icon: Brain,
+    title: "Model Training",
+    description: "Custom datasets, YOLO detectors, and multimodal fusion networks — trained, calibrated, and evaluated on held-out data.",
+  },
+  {
     icon: Cloud,
-    title: "Cloud & DevOps",
-    description:
-      "Production deployments via Docker, CI/CD pipelines, Nginx, VPS hosting, DigitalOcean, Vercel, and Render - with SSL/TLS and domain configuration.",
-    color: "text-primary",
-  },
-  {
-    id: "api-engineering",
-    icon: Terminal,
-    title: "API Engineering",
-    description:
-      "Secure, well-documented RESTful APIs and microservices with third-party integrations - payment gateways, Google Maps, and more.",
-    color: "text-accent",
+    title: "Production DevOps",
+    description: "Linux VPS, Nginx, SSL, PM2, Docker, and CI/CD with GitHub Actions. I own deployments end to end.",
   },
 ];
 
-const AboutSection = () => {
-  return (
-    <section id="about" className="section-padding relative">
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
-      
-      <div className="container mx-auto max-w-6xl">
-        <SectionHeading
-          badge="About"
-          title={<>Know Who <span className="text-gradient-primary">I Am</span></>}
-          subtitle="Full-stack & AI developer with a proven record of building and shipping scalable SaaS platforms, ERP/CRM systems, and real-time web applications. I specialize in the MERN stack with deep expertise in React.js, Node.js, and MongoDB - and I'm actively expanding into AI/ML with Python, TensorFlow, Django, and PostgreSQL. Every system I build is designed for performance, security, and long-term maintainability."
-        />
+const currentRole = experiences.find((e) => e.current);
+const education = experiences.find((e) => e.type === "edu");
 
-        {/* Mobile/tablet: show all cards in a clean responsive grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 lg:hidden">
+const facts: { icon: LucideIcon; label: string; value: string }[] = [
+  ...(currentRole ? [{ icon: Briefcase, label: "Currently", value: `${currentRole.title} @ ${currentRole.org}` }] : []),
+  { icon: MapPin, label: "Based in", value: profile.location },
+  ...(education ? [{ icon: GraduationCap, label: "Education", value: `${education.title}, ${education.org}` }] : []),
+  { icon: Sparkles, label: "Availability", value: profile.availability },
+];
+
+const AboutSection = () => (
+  <section id="about" className="section-padding relative">
+    <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
+
+    <div className="container mx-auto max-w-6xl">
+      <SectionHeading badge="About" title={<>Know Who <span className="text-gradient-primary">I Am</span></>} />
+
+      <div className="grid lg:grid-cols-[0.9fr_1.1fr] gap-10 lg:gap-14 items-start">
+        {/* Bio + facts */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="lg:sticky lg:top-28"
+        >
+          <p className="text-base sm:text-lg text-muted-foreground leading-relaxed mb-8">{profile.summary}</p>
+
+          <dl className="rounded-2xl bg-card border border-border shadow-card divide-y divide-border">
+            {facts.map(({ icon: Icon, label, value }) => (
+              <div key={label} className="flex items-start gap-4 px-5 py-4">
+                <div className="w-9 h-9 shrink-0 rounded-lg bg-primary/10 flex items-center justify-center">
+                  <Icon className="w-4 h-4 text-primary" />
+                </div>
+                <div className="min-w-0">
+                  <dt className="text-[11px] font-mono uppercase tracking-wider text-muted-foreground">{label}</dt>
+                  <dd className="text-sm font-semibold text-foreground">{value}</dd>
+                </div>
+              </div>
+            ))}
+          </dl>
+        </motion.div>
+
+        {/* What I do */}
+        <div className="grid sm:grid-cols-2 gap-4 sm:gap-5">
           {highlights.map((item, i) => (
             <motion.div
-              key={item.id}
+              key={item.title}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.45, delay: i * 0.06 }}
-              className="group card-spline relative h-full p-6 rounded-2xl bg-card border border-border hover:border-primary/20 transition-all duration-500 shadow-card hover:shadow-card-hover"
+              className="spotlight group card-spline relative p-6 rounded-2xl bg-card border border-border hover:border-primary/25 transition-all duration-500 shadow-card hover:shadow-card-hover hover:-translate-y-1"
             >
-              <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <div className="relative">
-                <div className="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/15 transition-colors">
-                  <item.icon className={`w-5 h-5 ${item.color} group-hover:scale-110 transition-transform duration-300`} />
-                </div>
-                <h3 className="font-semibold text-foreground mb-2 font-display text-lg">{item.title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{item.description}</p>
+              <div className="w-11 h-11 rounded-xl bg-gradient-primary flex items-center justify-center mb-4 shadow-glow">
+                <item.icon className="w-5 h-5 text-primary-foreground group-hover:scale-110 transition-transform duration-300" />
               </div>
+              <h3 className="font-bold text-foreground mb-2 font-display text-lg">{item.title}</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed">{item.description}</p>
             </motion.div>
           ))}
         </div>
-
-        {/* Desktop: keep the current animated stack */}
-        <div className="hidden lg:block">
-          <CardStack
-            items={highlights}
-            initialIndex={0}
-            maxVisible={5}
-            cardWidth={720}
-            cardHeight={300}
-            overlap={0.72}
-            spreadDeg={34}
-            depthPx={95}
-            tiltXDeg={9}
-            activeLiftPx={16}
-            activeScale={1.02}
-            inactiveScale={0.96}
-            springStiffness={170}
-            springDamping={32}
-            autoAdvance
-            intervalMs={4800}
-            pauseOnHover
-            showDots
-            className="mx-auto"
-            renderCard={(item) => (
-              <motion.div className="group card-spline relative h-full p-7 rounded-2xl bg-card border border-border hover:border-primary/20 transition-all duration-500 shadow-card hover:shadow-card-hover">
-                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                <div className="relative">
-                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-primary/15 transition-colors">
-                    <item.icon className={`w-6 h-6 ${item.color} group-hover:scale-110 transition-transform duration-300`} />
-                  </div>
-                  <h3 className="font-semibold text-foreground mb-2 font-display text-lg">{item.title}</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">{item.description}</p>
-                </div>
-              </motion.div>
-            )}
-          />
-        </div>
       </div>
-    </section>
-  );
-};
+    </div>
+  </section>
+);
 
 export default AboutSection;

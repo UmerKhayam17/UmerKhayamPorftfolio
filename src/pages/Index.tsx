@@ -8,12 +8,19 @@ import ResumeSection from "@/components/ResumeSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 import WhatsAppCTA from "@/components/WhatsAppCTA";
+import CommandMenu from "@/components/CommandMenu";
+import TechMarquee from "@/components/TechMarquee";
+import { useSpotlight } from "@/hooks/use-spotlight";
 
-const Index = () => (
+const Index = () => {
+  useSpotlight();
+  return (
   <div className="min-h-screen bg-background">
+    <CommandMenu />
     <WhatsAppCTA />
     <Navbar />
     <HeroSection />
+    <TechMarquee />
     <AboutSection />
     <SkillsSection />
     <ExperienceSection />
@@ -22,6 +29,7 @@ const Index = () => (
     <ContactSection />
     <Footer />
   </div>
-);
+  );
+};
 
 export default Index;

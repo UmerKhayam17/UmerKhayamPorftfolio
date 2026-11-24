@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
-import { Mail, Phone, MapPin, Send, Linkedin, Github } from "lucide-react";
+import { Mail, MessageCircle, MapPin, Send, Linkedin } from "lucide-react";
 import SectionHeading from "./SectionHeading";
+import { profile } from "@/data/portfolioData";
 
 const ContactSection = () => {
   return (
@@ -20,18 +21,19 @@ const ContactSection = () => {
 
         <div className="grid md:grid-cols-3 gap-4 sm:gap-5 max-w-3xl mx-auto mb-12 sm:mb-16">
           {[
-            { icon: Mail, label: "Email", value: "umerkhayam1717@gmail.com", href: "mailto:umerkhayam1717@gmail.com" },
-            { icon: Phone, label: "Phone", value: "+92 316 5511251", href: "tel:03165511251" },
-            { icon: MapPin, label: "Location", value: "Islamabad, Pakistan", href: "#" },
+            { icon: Mail, label: "Email", value: profile.email, href: `mailto:${profile.email}` },
+            { icon: MessageCircle, label: "WhatsApp", value: profile.phone, href: `https://wa.me/${profile.whatsapp}`, external: true },
+            { icon: MapPin, label: "Location", value: profile.location, href: "#contact" },
           ].map((item, i) => (
             <motion.a
               key={item.label}
               href={item.href}
+              {...("external" in item && item.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="group p-5 sm:p-7 rounded-2xl bg-card border border-border hover:border-primary/20 hover:shadow-glow transition-all duration-500 text-center hover:-translate-y-1"
+              className="spotlight group p-5 sm:p-7 rounded-2xl bg-card border border-border hover:border-primary/20 hover:shadow-glow transition-all duration-500 text-center hover:-translate-y-1"
             >
               <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-4 group-hover:bg-primary/15 transition-colors">
                 <item.icon className="w-5 h-5 text-primary group-hover:scale-110 transition-transform duration-300" />
@@ -52,16 +54,16 @@ const ContactSection = () => {
         >
           <div className="inline-flex w-full sm:w-auto flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3 sm:gap-4 justify-center">
             <a
-              href="mailto:umerkhayam1717@gmail.com"
+              href={`mailto:${profile.email}`}
               className="group inline-flex w-full sm:w-auto justify-center items-center gap-2.5 px-8 py-4 rounded-xl bg-gradient-primary text-primary-foreground font-semibold hover:shadow-glow transition-all duration-300 hover:-translate-y-0.5"
             >
               <Send className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
               Send a Message
             </a>
             <a
-              href="https://www.linkedin.com/in/umerkhayamsatti/"
+              href={profile.linkedin}
               target="_blank"
-              rel="noopener"
+              rel="noopener noreferrer"
               className="inline-flex w-full sm:w-auto justify-center items-center gap-2.5 px-8 py-4 rounded-xl border border-border text-foreground font-semibold hover:border-primary/30 hover:bg-primary/5 transition-all duration-300"
             >
               <Linkedin className="w-4 h-4" />

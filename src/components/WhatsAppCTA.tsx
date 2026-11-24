@@ -1,9 +1,10 @@
 import { MessageCircle } from "lucide-react";
+import { profile } from "@/data/portfolioData";
 
 const WhatsAppCTA = () => {
   return (
     <a
-      href="https://wa.me/923165511251"
+      href={`https://wa.me/${profile.whatsapp}`}
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Chat on WhatsApp"

@@ -1,12 +1,7 @@
 import { useEffect, useState } from "react";
+import { profile } from "@/data/portfolioData";
 
-const roles = [
-  "Full Stack Developer",
-  "AI/ML Engineer",
-  "SaaS Architect",
-  "MERN Stack Expert",
-  "Backend Engineer",
-];
+const roles = profile.roles;
 
 const TypewriterText = () => {
   const [roleIndex, setRoleIndex] = useState(0);
@@ -15,13 +10,14 @@ const TypewriterText = () => {
 
   useEffect(() => {
     const currentRole = roles[roleIndex];
-    const timeout = deleting ? 40 : 80;
+    const atEnd = !deleting && charIndex === currentRole.length;
+    const timeout = atEnd ? 2000 : deleting ? 40 : 80;
 
     const timer = setTimeout(() => {
       if (!deleting && charIndex < currentRole.length) {
         setCharIndex(charIndex + 1);
       } else if (!deleting && charIndex === currentRole.length) {
-        setTimeout(() => setDeleting(true), 2000);
+        setDeleting(true);
       } else if (deleting && charIndex > 0) {
         setCharIndex(charIndex - 1);
       } else if (deleting && charIndex === 0) {

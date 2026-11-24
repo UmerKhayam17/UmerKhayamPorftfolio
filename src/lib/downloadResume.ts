@@ -2,6 +2,8 @@ import { jsPDF } from "jspdf";
 import { experiences, profile, projects, skillCategories } from "@/data/portfolioData";
 
 // ======================= CONFIGURATION =======================
+type RGB = [number, number, number];
+
 const CONFIG = {
   page: { width: 210, height: 297, topMargin: 18, bottomMargin: 20 },
   leftMargin: 15,
@@ -9,10 +11,10 @@ const CONFIG = {
   lineHeight: 5.5,
   bulletIndent: 5,
   colors: {
-    text: [33, 33, 33],
-    secondary: [100, 100, 100],
-    accent: [41, 128, 185],     // subtle blue for section titles (optional)
-    lightGray: [240, 240, 240],
+    text: [33, 33, 33] as RGB,
+    secondary: [100, 100, 100] as RGB,
+    accent: [41, 128, 185] as RGB,     // subtle blue for section titles (optional)
+    lightGray: [240, 240, 240] as RGB,
   },
   fonts: {
     name: 22,
@@ -102,7 +104,7 @@ export const downloadResume = () => {
   y += 6;
 
   // Contact line - split into two lines if too long (never overflows)
-  const contactRaw = `${profile.location} | ${profile.phone} | ${profile.email} | ${profile.linkedin.replace(/^https?:\/\//, "")}`;
+  const contactRaw = `${profile.location} | WhatsApp ${profile.phone} | ${profile.email} | ${profile.linkedin.replace(/^https?:\/\//, "")}`;
   const contactLines = doc.splitTextToSize(contactRaw, contentWidth);
   contactLines.forEach((line: string) => {
     drawText(line, CONFIG.leftMargin, y, { fontSize: CONFIG.fonts.small });
@@ -147,7 +149,7 @@ export const downloadResume = () => {
     const dateText = exp.period;
     const dateWidth = doc.getTextWidth(dateText);
     const maxTitleWidth = contentWidth - dateWidth - 4; // 4mm gap
-    let titleText = exp.title;
+    const titleText = exp.title;
     let titleLines = [titleText];
     if (doc.getTextWidth(titleText) > maxTitleWidth) {
       // Truncate or wrap? We'll wrap the title.

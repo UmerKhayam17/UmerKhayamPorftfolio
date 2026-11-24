@@ -126,14 +126,14 @@ export function CardStack<T extends CardStackItem>({
     return () => window.clearInterval(id);
   }, [autoAdvance, intervalMs, hovering, pauseOnHover, reduceMotion, len, loop, active, next]);
 
-  if (!len) return null;
-  const activeItem = items[active]!;
-
   React.useEffect(() => {
     return () => {
       if (hoverTimerRef.current) window.clearTimeout(hoverTimerRef.current);
     };
   }, []);
+
+  if (!len) return null;
+  const activeItem = items[active]!;
 
   return (
     <div
